@@ -1,0 +1,132 @@
+
+//===============================: Loader-1 :===============================
+// Bar Settings
+$text-colour: #fff;
+$bar-colour: $text-colour;
+$bar-animation-duration: 2.8s;
+
+// These are not to be adjusted; it would mess 
+// with the angles. If anyone knows how to make 
+// the angles dynamic. I'd love to hear it.
+$bar-width: 0.3rem;
+$bar-height: 2.5rem;
+$bar-count: 7;
+
+// Generated settings
+$bar-animation-duration-single: -($bar-animation-duration / $bar-count);
+
+//===========================================================================
+
+.loader1 {
+	position: relative;
+	padding: 0;
+	width: 10rem;
+	height: $bar-height;
+	transform: scale(1.5);
+
+	& span {
+		display: block;
+		position: absolute;
+		right: 0;
+		width: $bar-width;
+		height: $bar-height;
+		border-radius: 0.1rem;
+		// Rotate from the middle of the bottom
+		transform-origin: 50% 100%;
+		background-color: $bar-colour;
+		animation: bar linear $bar-animation-duration infinite;
+		// Tell the browser which properties will change in the animation
+		will-change: transform;
+
+		&:nth-child(1) {
+			transform: translateX(0) rotate(0deg);
+			opacity: 0.2;
+		}
+		&:nth-child(2) {
+			transform: translateX(-1.5rem) rotate(0deg);
+			animation-delay: $bar-animation-duration-single;
+		}
+		&:nth-child(3) {
+			transform: translateX(-3rem) rotate(0deg);
+			animation-delay: ($bar-animation-duration-single * 2);
+		}
+		&:nth-child(4) {
+			transform: translateX(-4.5rem) rotate(10deg);
+			animation-delay: ($bar-animation-duration-single * 3);
+		}
+		&:nth-child(5) {
+			transform: translateX(-6rem) rotate(40deg);
+			animation-delay: ($bar-animation-duration-single * 4);
+		}
+		&:nth-child(6) {
+			transform: translateX(-7.5rem) rotate(62deg);
+			animation-delay: ($bar-animation-duration-single * 5);
+		}
+		&:nth-child(7) {
+			transform: translateX(-9rem) rotate(72deg);
+			animation-delay: ($bar-animation-duration-single * 6);
+		}
+    }
+    
+    &__text {
+        font-family: Arial, Helvetica, sans-serif;
+        color: $text-colour;
+        font-size: 5rem;
+        margin-bottom: 3rem;
+    }
+
+	&__wrapper {
+		z-index: 100;
+		width: 100%;
+		height: 100%;
+		position: fixed;
+		background: linear-gradient(to bottom right, #00c6fb, #005bea);
+		transition: all 0.2s ease;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+        justify-content: center;
+        opacity: 0.9;
+	}
+}
+
+
+@keyframes bar {
+	0% {
+		transform: translateX(0) rotate(0deg);
+		opacity: 0;
+	}
+	14.28% {
+		transform: translateX(-15px) rotate(0deg);
+		opacity: 1;
+	}
+	28.56% {
+		transform: translateX(-30px) rotate(0deg);
+		opacity: 1;
+	}
+	37.12% {
+		transform: translateX(-39px) rotate(0deg);
+		opacity: 1;
+	}
+	42.84% {
+		transform: translateX(-45px) rotate(10deg);
+		opacity: 1;
+	}
+	57.12% {
+		transform: translateX(-60px) rotate(40deg);
+		opacity: 1;
+	}
+	71.4% {
+		transform: translateX(-75px) rotate(62deg);
+		opacity: 1;
+	}
+	85.68% {
+		transform: translateX(-90px) rotate(72deg);
+		opacity: 1;
+	}
+	100% {
+		transform: translateX(-105px) rotate(74deg);
+		opacity: 0;
+	}
+}
+

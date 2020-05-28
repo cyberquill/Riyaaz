@@ -1,0 +1,120 @@
+.home {
+    margin: 0;
+    padding: 0;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+
+    &__wrapper {
+        height: 90%;
+        display: flex;
+    }
+
+    &__player {
+        height: 10%;
+        background: #333;
+    }
+
+    &__nav {
+        width: 20%;
+        background: orangered;
+    }
+
+    &__container {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+
+    &__search {
+        height: 10%;
+        background-color: #999;
+    }
+
+    &__section {
+        flex: 1;
+        display: flex;
+        justify-content: space-between;
+    }
+}
+
+.rec_playlists {
+    width: 80vw;
+    display: flex;
+    flex-direction: column;
+    
+    &__header {
+        font-family: 'Rubik', sans-serif;
+        font-weight: 700;
+        font-size: 2.5rem;
+        padding-left: 4rem;
+        padding-top: 2rem;
+    }
+
+    &__item-wrapper {
+        display: flex;
+        padding: 2rem;
+        padding-bottom: 2.5rem;
+        flex-wrap: nowrap;
+        overflow-x: hidden;
+    }
+
+    &__item {
+        flex-shrink: 0;
+        width: 13rem;
+        height: 13rem;
+        margin: 0 2rem;
+        background: #333;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0px 13px 15px -7px #888;
+        // box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+
+        &--img {
+            max-height: 100%;
+        }
+    }
+}
+
+.toplist {
+    width: 48%;
+
+    &__header {
+        font-family: 'Rubik', sans-serif;
+        font-weight: 700;
+        font-size: 2.5rem;
+        padding: 2rem 0;
+        padding-left: 4rem;
+    }
+}
+
+.recent {
+    width: 48%;
+
+    &__header {
+        font-family: 'Rubik', sans-serif;
+        font-weight: 700;
+        font-size: 2.5rem;
+        padding: 2rem 0;
+        padding-left: 4rem;
+    }
+}
+
+.songs {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+
+    & .song {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-evenly;
+        height: 3rem;
+        border-top: 0.5px solid #999;
+    }
+}

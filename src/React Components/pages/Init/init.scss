@@ -1,0 +1,198 @@
+.init {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #ddd;
+
+    &__window {
+        background: linear-gradient(to bottom right, #00c6fb, #005bea);
+        padding: 4rem 5rem 5rem;
+        border-radius: 1.5rem;
+        box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    &__msg {
+        color: white;
+        font-size: 3rem;
+        font-weight: 300;
+        font-family: 'Rubik', sans-serif;
+        margin-bottom: 3rem;
+    }
+
+    &__btn {
+        width: 70%;
+        outline: none;
+        border: none;
+        color: #5a297c;
+        margin: 0 auto;
+        padding: 1rem 2rem;
+        font-size: 1.5rem;
+        font-weight: 600;
+        letter-spacing: 0.2rem;
+        text-transform: uppercase;
+        text-decoration: none;
+        // box-shadow: 1px 4px 5px 1px rgba(0,0,0,0.1);
+        box-shadow: 0 0.5rem 1rem -0.3rem rgba(0, 0, 0, 0.9);
+        overflow: hidden;
+        position: relative;
+        background: white;
+        border: 2px solid white;
+        transition: all 0.3s ease;
+        height: 5rem;
+        flex-shrink: 0;
+
+        &:hover {
+            background: #0c002b;
+            border: 2px solid #0c002b;
+            transform: scale(1.1);
+            color: white;
+            cursor: pointer;
+            // box-shadow: 0 20px 50px rgba(0, 0, 0, .5);
+            box-shadow: 0 1rem 2rem -0.5rem rgba(0, 0, 0, 0.8);
+
+            &::before {
+                content: '';
+                background: rgba(255, 255, 255, 0.05);
+            }
+
+            & span:nth-child(1) {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 2px;
+                background: linear-gradient(to right, #0c002b, #1779ff);
+                animation: animate1 2s linear infinite;
+            }
+
+            & span:nth-child(2) {
+                position: absolute;
+                top: 0;
+                right: 0;
+                width: 2px;
+                height: 100%;
+                background: linear-gradient(to bottom, #0c002b, #1779ff);
+                animation: animate2 2s linear infinite;
+                animation-delay: 1s;
+            }
+
+            & span:nth-child(3) {
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                width: 100%;
+                height: 2px;
+                background: linear-gradient(to left, #0c002b, #1779ff);
+                animation: animate3 2s linear infinite;
+            }
+
+            & span:nth-child(4) {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 2px;
+                height: 100%;
+                background: linear-gradient(to top, #0c002b, #1779ff);
+                animation: animate4 2s linear infinite;
+                animation-delay: 1s;
+            }
+        }
+
+        &::before {
+            content: '';
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            bottom: 2px;
+            width: 50%;
+            background: rgba(0, 0, 0, 0.08);
+        }
+
+        & span:nth-child(1) {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(to right, white, #5a297c);
+            animation: animate1 2s linear infinite;
+        }
+
+        & span:nth-child(2) {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 2px;
+            height: 100%;
+            background: linear-gradient(to bottom, white, #5a297c);
+            animation: animate2 2s linear infinite;
+            animation-delay: 1s;
+        }
+
+        & span:nth-child(3) {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(to left, white, #5a297c);
+            animation: animate3 2s linear infinite;
+        }
+
+        & span:nth-child(4) {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 2px;
+            height: 100%;
+            background: linear-gradient(to top, white, #5a297c);
+            animation: animate4 2s linear infinite;
+            animation-delay: 1s;
+        }
+    }
+}
+
+
+
+
+@keyframes animate1 {
+	0% {
+		transform: translateX(-100%);
+	}
+	100% {
+		transform: translateX(100%);
+	}
+}
+
+@keyframes animate2 {
+	0% {
+		transform: translateY(-100%);
+	}
+	100% {
+		transform: translateY(100%);
+	}
+}
+
+@keyframes animate3 {
+	0% {
+		transform: translateX(100%);
+	}
+	100% {
+		transform: translateX(-100%);
+	}
+}
+
+@keyframes animate4 {
+	0% {
+		transform: translateY(100%);
+	}
+	100% {
+		transform: translateY(-100%);
+	}
+}
