@@ -2,6 +2,8 @@
 
 # dependencies
 /node_modules
+/src/music/*
+!/src/music/.gitkeep
 /.pnp
 .pnp.js
 
