@@ -1,0 +1,10 @@
+export const ERROR = 'ERROR';
+
+export const DIR_SET = 'DIR_SET';
+export const DIR_CLEAR = 'DIR_CLEAR';
+
+export const PLAYLISTS_LOAD = 'PLAYLISTS_LOAD';
+export const PLAYLISTS_SAMPLE = 'PLAYLISTS_SAMPLE';
+export const PLAYLISTS_VISITED = 'PLAYLISTS_VISITED';
+export const PLAYLISTS_UPDATE = 'PLAYLISTS_UPDATE';
+export const PLAYLISTS_CLEAR = 'PLAYLISTS_CLEAR';

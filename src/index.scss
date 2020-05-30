@@ -51,8 +51,9 @@ ORDER: tab-land > tab-port > phone > big-desktop
 
 html {
     // This defines what 1rem is
-    width: 100vw;
-    height: 100vh;
+    width: 100%;
+    height: 100%;
+    font-family: 'Roboto', sans-serif;
     font-size: 62.5%; //1 rem = 10px; 10px/16px = 62.5%
 
     @include respond(tab-land) {
@@ -71,12 +72,18 @@ html {
 }
 
 body {
-    width: 100vw;
-    height: 100vh;
+    width: 100%;
+    height: 100%;
     position: relative;
     
     a,
     a:hover {
         text-decoration: none !important;
     }
+}
+
+body #root {
+    position: relative;
+    width: 100%;
+    height: 100%;
 }

@@ -19,6 +19,8 @@ function createWindow() {
             slashes: true
         }) 
     );
+    (process.env.NODE_ENV === 'production') ? mainWindow.removeMenu() : null;
+    process.env.ELECTRON_DISABLE_SECURITY_WARNINGS = true;
     mainWindow.on('closed', () => mainWindow = null); 
 };
 

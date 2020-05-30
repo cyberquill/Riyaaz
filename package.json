@@ -9,12 +9,17 @@
         "@testing-library/react": "^9.5.0",
         "@testing-library/user-event": "^7.2.1",
         "electron": "^9.0.0",
+        "jstat": "^1.9.3",
         "list-react-files": "^0.2.0",
         "node-sass": "^4.14.1",
         "react": "^16.13.1",
         "react-dom": "^16.13.1",
+        "react-redux": "^7.2.0",
         "react-router-dom": "^5.2.0",
-        "react-scripts": "3.4.1"
+        "react-scripts": "3.4.1",
+        "redux": "^4.0.5",
+        "redux-persist": "^6.0.0",
+        "redux-thunk": "^2.3.0"
     },
     "scripts": {
         "start": "nf start -p 3000",
@@ -46,7 +51,8 @@
     "devDependencies": {
         "@rescripts/cli": "0.0.14",
         "@rescripts/rescript-env": "0.0.12",
-        "electron-builder": "^22.7.0"
+        "electron-builder": "^22.7.0",
+        "electron-devtools-installer": "^3.0.0"
     },
     "build": {
         "appId": "com.electron.electron-with-create-react-app",

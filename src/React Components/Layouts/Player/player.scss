@@ -1,0 +1,50 @@
+$btn-dimension: 5rem;
+
+.player {
+    width: 100%;
+    height: 12.5%;
+    background: #ddd;
+    color: white;
+    display: flex;
+
+    &__info {
+        flex: 1;
+        
+    }
+
+    &__controls {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: space-evenly;
+
+        &__btn {
+            width: $btn-dimension;
+            height: $btn-dimension;
+            background: white;
+            border-radius: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #333;
+            font-size: 2rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+
+            &:hover {
+                transform: scale(1.1);
+                box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+            }
+        }
+
+        & i.fa-play {
+            padding-left: 0.25rem;
+        }
+    }
+
+    &__volume {
+        flex: 1;
+        
+    }
+}

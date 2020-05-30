@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
-import { withRouter, Link, Redirect } from 'react-router-dom';
-import Loader1 from '../../Layouts/Loader1/Loader1';
+import { withRouter, Redirect } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { set_DIR, clear_DIR } from '../../../redux/actions/DIR actions';
+import { clear_playlists } from '../../../redux/actions/PLAYLIST actions';
 import './init.scss';
 
 class Init extends Component {
@@ -8,18 +10,21 @@ class Init extends Component {
         super(props);
         this.state = {};
     }
-
-    componentDidMount() {}
-
+    //==========================================================================
+    componentDidMount() {
+        // this.props.clear_playlists();
+        // this.props.clear_DIR();
+    }
+    //==========================================================================
     dirSelectHandler(event) {
         let dir = document.getElementById('dir').files[0].path;
         const idx = dir.lastIndexOf('\\');
         dir = dir.slice(0, idx);
-        this.props.updateDIR(dir);
+        this.props.set_DIR(dir);
     }
-
+    //==========================================================================
     render() {
-        if (this.props.dir_set) return <Redirect to='/home' />;
+        if (this.props.DIR.set) return <Redirect to='/home' />;
 
         return (
             <div className='init'>
@@ -46,5 +51,10 @@ class Init extends Component {
         );
     }
 }
-
-export default withRouter(Init);
+//==========================================================================
+const mapStatesToProps = (store) => ({
+    DIR: store.DIR,
+    ERROR: store.ERROR,
+});
+//==========================================================================
+export default connect(mapStatesToProps, { set_DIR, clear_DIR, clear_playlists })(withRouter(Init));

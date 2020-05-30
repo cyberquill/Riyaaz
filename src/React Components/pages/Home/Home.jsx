@@ -1,121 +1,73 @@
 import React, { Component } from 'react';
-import img1 from '../../../Assets/4.jpg';
-import img2 from '../../../Assets/6.jpg';
-import img3 from '../../../Assets/5.jpg';
-import img4 from '../../../Assets/2.jpg';
-import img5 from '../../../Assets/3.jpg';
-import img6 from '../../../Assets/7.jpg';
+import { connect } from 'react-redux';
+import { withRouter, Redirect } from 'react-router-dom';
+import Loader1 from '../../Layouts/Loader1/Loader1';
+import PlaylistCards from '../../components/PlaylistCards/PlaylistCards';
+import TopList from '../../components/TopList/TopList';
+import RecentList from '../../components/RecentList/RecentList';
+import SideBar from '../../Layouts/SideBar/SideBar';
+import Player from '../../Layouts/Player/Player';
+import { clear_DIR } from '../../../redux/actions/DIR actions';
+import {
+    load_playlists,
+    sample_display,
+    update_params,
+    clear_playlists,
+} from '../../../redux/actions/PLAYLIST actions';
 import './home.scss';
 
 class Home extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            showLoader: true,
+        };
+    }
+
+    componentDidMount() {
+        if (this.props.DIR.set) {
+            if(!this.props.PLAYLIST.K)
+                this.props.load_playlists(this.props.DIR.path);
+            else
+                this.props.update_params();
+            this.props.sample_display();
+            setTimeout(() => this.setState({ showLoader: false }), 2000);
+        }
+        // this.props.clear_DIR();
+    }
+
     render() {
+        if (!this.props.DIR.set) return <Redirect to='/' />;
+        if (this.state.showLoader) return <Loader1 />;
+
         return (
-            <div className='home'>
-                <div className='home__wrapper'>
-                    <div className='home__nav'></div>
-                    <div className='home__container'>
-                        <div className='home__search'></div>
-                        <div className='rec_playlists'>
-                            <div className='rec_playlists__header'>Playlists Made For You:</div>
-                            <div className='rec_playlists__item-wrapper'>
-                                <div className='rec_playlists__item'>
-                                    <img src={img1} className='rec_playlists__item--img' />
-                                </div>
-                                <div className='rec_playlists__item'>
-                                    <img src={img2} className='rec_playlists__item--img' />
-                                </div>
-                                <div className='rec_playlists__item'>
-                                    <img src={img3} className='rec_playlists__item--img' />
-                                </div>
-                                <div className='rec_playlists__item'>
-                                    <img src={img4} className='rec_playlists__item--img' />
-                                </div>
-                                <div className='rec_playlists__item'>
-                                    <img src={img5} className='rec_playlists__item--img' />
-                                </div>
-                                <div className='rec_playlists__item'>
-                                    <img src={img6} className='rec_playlists__item--img' />
-                                </div>
-                            </div>
-                        </div>
+            <>
+                <div className='home--wrapper'>
+                    <SideBar />
+                    <div className='home'>
+                        <PlaylistCards />
                         <div className='home__section'>
-                            <div className='toplist'>
-                                <div className='toplist__header'>Top List:</div>
-                                <div className='songs'>
-                                    <div className='song'>
-                                        <div className='title'>Title 1</div>
-                                        <div className='artist'>Artist 1</div>
-                                        <div className='album'>Album 1</div>
-                                    </div>
-                                    <div className='song'>
-                                        <div className='title'>Title 2</div>
-                                        <div className='artist'>Artist 2</div>
-                                        <div className='album'>Album 2</div>
-                                    </div>
-                                    <div className='song'>
-                                        <div className='title'>Title 3</div>
-                                        <div className='artist'>Artist 3</div>
-                                        <div className='album'>Album 3</div>
-                                    </div>
-                                    <div className='song'>
-                                        <div className='title'>Title 4</div>
-                                        <div className='artist'>Artist 4</div>
-                                        <div className='album'>Album 4</div>
-                                    </div>
-                                    <div className='song'>
-                                        <div className='title'>Title 5</div>
-                                        <div className='artist'>Artist 5</div>
-                                        <div className='album'>Album 5</div>
-                                    </div>
-                                    <div className='song'>
-                                        <div className='title'>Title 6</div>
-                                        <div className='artist'>Artist 6</div>
-                                        <div className='album'>Album 6</div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className='recent'>
-                                <div className='recent__header'>Recents:</div>
-                                <div className='songs'>
-                                    <div className='song'>
-                                        <div className='title'>Title 1</div>
-                                        <div className='artist'>Artist 1</div>
-                                        <div className='album'>Album 1</div>
-                                    </div>
-                                    <div className='song'>
-                                        <div className='title'>Title 2</div>
-                                        <div className='artist'>Artist 2</div>
-                                        <div className='album'>Album 2</div>
-                                    </div>
-                                    <div className='song'>
-                                        <div className='title'>Title 3</div>
-                                        <div className='artist'>Artist 3</div>
-                                        <div className='album'>Album 3</div>
-                                    </div>
-                                    <div className='song'>
-                                        <div className='title'>Title 4</div>
-                                        <div className='artist'>Artist 4</div>
-                                        <div className='album'>Album 4</div>
-                                    </div>
-                                    <div className='song'>
-                                        <div className='title'>Title 5</div>
-                                        <div className='artist'>Artist 5</div>
-                                        <div className='album'>Album 5</div>
-                                    </div>
-                                    <div className='song'>
-                                        <div className='title'>Title 6</div>
-                                        <div className='artist'>Artist 6</div>
-                                        <div className='album'>Album 6</div>
-                                    </div>
-                                </div>
-                            </div>
+                            <TopList />
+                            <RecentList />
                         </div>
                     </div>
                 </div>
-                <div className='home__player'></div>
-            </div>
+                <Player />
+            </>
         );
     }
 }
-
-export default Home;
+//==========================================================================
+const mapStatesToProps = (store) => ({
+    DIR: store.DIR,
+    PLAYLIST: store.PLAYLIST,
+    ERROR: store.ERROR,
+});
+//==========================================================================
+export default connect(mapStatesToProps, {
+    clear_DIR,
+    load_playlists,
+    sample_display,
+    update_params,
+    clear_playlists,
+})(withRouter(Home));

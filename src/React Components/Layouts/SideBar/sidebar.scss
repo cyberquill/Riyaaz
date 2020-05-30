@@ -1,0 +1,11 @@
+$sidebar-width: 20%;
+
+.sidebar {
+    width: $sidebar-width;
+    height: 100%;
+    background: orangered;
+}
+
+.sidebar + div {
+    width: 100% - $sidebar-width;
+}
