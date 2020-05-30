@@ -6,6 +6,7 @@ import {
     PLAYLISTS_VISITED,
     PLAYLISTS_UPDATE,
     PLAYLISTS_CLEAR,
+    PLAY_SET,
 } from '../types';
 
 export const load_playlists = (DIR) => (dispatch) => {
@@ -65,8 +66,9 @@ export const sample_display = () => (dispatch, getState) => {
 };
 
 export const mark_visited = (selected) => (dispatch, getState) => {
-    console.log('VISITED: ',selected);
+    const { display } = getState().PLAYLIST;
     dispatch({ type: PLAYLISTS_VISITED, payload: selected });
+    dispatch({ type: PLAY_SET, payload: { playing: 0, queue: display[selected] } });
 };
 
 export const update_params = () => (dispatch, getState) => {

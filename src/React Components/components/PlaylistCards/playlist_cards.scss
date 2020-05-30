@@ -2,9 +2,10 @@ $playlist-item-width: 13rem;
 
 .playlists {
     width: calc(100% - 8rem);
-    margin: auto;
     display: flex;
     flex-direction: column;
+    margin: 0 auto;
+    background: #eee;
 
     &__header {
         font-family: 'Rubik', sans-serif;

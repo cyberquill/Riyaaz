@@ -3,11 +3,10 @@ import { connect } from 'react-redux';
 import { withRouter, Redirect } from 'react-router-dom';
 import Loader1 from '../../Layouts/Loader1/Loader1';
 import PlaylistCards from '../../components/PlaylistCards/PlaylistCards';
-import TopList from '../../components/TopList/TopList';
-import RecentList from '../../components/RecentList/RecentList';
 import SideBar from '../../Layouts/SideBar/SideBar';
 import Player from '../../Layouts/Player/Player';
 import { clear_DIR } from '../../../redux/actions/DIR actions';
+import { clear_queue } from '../../../redux/actions/PLAY actions';
 import {
     load_playlists,
     sample_display,
@@ -15,6 +14,7 @@ import {
     clear_playlists,
 } from '../../../redux/actions/PLAYLIST actions';
 import './home.scss';
+import PlayArea from '../../components/PlayArea/PlayArea';
 
 class Home extends Component {
     constructor(props) {
@@ -34,6 +34,7 @@ class Home extends Component {
             setTimeout(() => this.setState({ showLoader: false }), 2000);
         }
         // this.props.clear_DIR();
+        this.props.clear_queue();
     }
 
     render() {
@@ -46,10 +47,7 @@ class Home extends Component {
                     <SideBar />
                     <div className='home'>
                         <PlaylistCards />
-                        <div className='home__section'>
-                            <TopList />
-                            <RecentList />
-                        </div>
+                        <PlayArea />
                     </div>
                 </div>
                 <Player />
@@ -70,4 +68,5 @@ export default connect(mapStatesToProps, {
     sample_display,
     update_params,
     clear_playlists,
+    clear_queue,
 })(withRouter(Home));

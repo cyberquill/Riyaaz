@@ -3,17 +3,35 @@ $btn-dimension: 5rem;
 .player {
     width: 100%;
     height: 12.5%;
-    background: #ddd;
+    background: #bbb;
     color: white;
     display: flex;
+    justify-content: space-between;
+    border-top: 1px solid #555;
 
     &__info {
-        flex: 1;
-        
+        width: 33%;
+        color: #333;
+        padding: 0 2rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+
+        &__name {
+            font-size: 2rem;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        &__dir {
+            font-style: italic;
+            font-size: 1.25rem;
+        }
     }
 
     &__controls {
-        flex: 1;
+        width: 33%;
         display: flex;
         align-items: center;
         justify-content: space-evenly;
@@ -30,11 +48,11 @@ $btn-dimension: 5rem;
             font-size: 2rem;
             cursor: pointer;
             transition: all 0.3s ease;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
 
             &:hover {
                 transform: scale(1.1);
-                box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
             }
         }
 
@@ -44,7 +62,19 @@ $btn-dimension: 5rem;
     }
 
     &__volume {
-        flex: 1;
-        
+        width: 33%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        & .MuiSlider-root {
+            margin: 0 3rem;
+            width: 50%;
+        }
+
+        & i {
+            color: #333;
+            font-size: 3rem;
+        }
     }
 }
