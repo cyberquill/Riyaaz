@@ -11,14 +11,14 @@ $playlist-item-width: 13rem;
         font-family: 'Rubik', sans-serif;
         font-weight: 700;
         font-size: 2.5rem;
-        padding-left: 4rem;
+        padding-left: 2rem;
         padding-top: 2rem;
     }
 
     &__item-wrapper {
         display: flex;
         padding: 2rem 0;
-        padding-bottom: 2.5rem;
+        padding-bottom: 1rem;
         flex-wrap: nowrap;
         overflow-x: auto;
     }

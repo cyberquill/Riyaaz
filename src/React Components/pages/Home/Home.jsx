@@ -6,12 +6,10 @@ import PlaylistCards from '../../components/PlaylistCards/PlaylistCards';
 import SideBar from '../../Layouts/SideBar/SideBar';
 import Player from '../../Layouts/Player/Player';
 import { clear_DIR } from '../../../redux/actions/DIR actions';
-import { clear_queue } from '../../../redux/actions/PLAY actions';
 import {
     load_playlists,
     sample_display,
     update_params,
-    clear_playlists,
 } from '../../../redux/actions/PLAYLIST actions';
 import './home.scss';
 import PlayArea from '../../components/PlayArea/PlayArea';
@@ -34,7 +32,9 @@ class Home extends Component {
             setTimeout(() => this.setState({ showLoader: false }), 2000);
         }
         // this.props.clear_DIR();
-        this.props.clear_queue();
+        // console.log(this.props.DIR);
+        // console.log(this.props.PLAY);
+        // console.log(this.props.PLAYLIST);
     }
 
     render() {
@@ -58,6 +58,7 @@ class Home extends Component {
 //==========================================================================
 const mapStatesToProps = (store) => ({
     DIR: store.DIR,
+    PLAY: store.PLAY,
     PLAYLIST: store.PLAYLIST,
     ERROR: store.ERROR,
 });
@@ -67,6 +68,4 @@ export default connect(mapStatesToProps, {
     load_playlists,
     sample_display,
     update_params,
-    clear_playlists,
-    clear_queue,
 })(withRouter(Home));

@@ -10,7 +10,7 @@ const initialState = {
     K: null,
     Np: null,
     gamma: null,
-    nUpdate: 0,
+    nSession: 0,
     cluster: [],
     playlist: [],
     display: [],
@@ -43,7 +43,7 @@ export default function (state = initialState, action) {
             return {
                 ...state,
                 ...action.payload,
-                nUpdate: state.nUpdate+1,
+                nSession: state.nSession+1,
             };
 
         case PLAYLISTS_CLEAR:

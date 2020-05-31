@@ -7,7 +7,6 @@ import { set_playing } from '../../../redux/actions/PLAY actions';
 import play_GIF from '../../../Assets/playing.gif';
 import linspace from '../../../util/linspace';
 import './playarea.scss';
-const vdom2html = window.vdom2html;
 
 class PlayArea extends Component {
     constructor(props) {
@@ -122,7 +121,7 @@ class PlayArea extends Component {
     //==========================================================================
     render() {
         if (!this.props.PLAY.set) return <div className='playarea'></div>;
-        const { playing, queue, shuffle, volume } = this.props.PLAY;
+        const { playing, queue } = this.props.PLAY;
 
         const chartInput = this.getChartInput();
         const chart = (

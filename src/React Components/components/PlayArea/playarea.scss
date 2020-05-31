@@ -8,12 +8,12 @@ $song-gif-dimension: 2rem;
     &__songs {
         background: #eee;
         padding: 1rem;
-        width: 60%;
+        width: 55%;
         overflow-y: auto;
     }
 
     &__info {
-        width: 40%;
+        width: 45%;
         height: 100%;
         background: white;
         overflow-x: hidden;
@@ -43,12 +43,17 @@ $song-gif-dimension: 2rem;
     font-size: 1.25rem;
     background: white;
     border: none;
+    border: 2px solid transparent;
     border-radius: 1px;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
     cursor: pointer;
     transition: all 0.3s ease;
 
     &:hover {
+        color: white;
+        background: #555;
+        border-radius: 5px;
+        border: 2px solid white;
         transform: scale(1.02);
         padding: 1.1rem 0;
         box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);

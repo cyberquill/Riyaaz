@@ -3,90 +3,114 @@ import { connect } from 'react-redux';
 import fs from 'fs';
 import { withRouter } from 'react-router-dom';
 import Slider from '@material-ui/core/Slider';
-import isEmpty from '../../../util/isEmpty';
 import {
     set_volume,
     toggle_playing_state,
     goto_prev,
     goto_next,
 } from '../../../redux/actions/PLAY actions';
+import isEmpty from '../../../util/isEmpty';
 import './player.scss';
 
 class Player extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            volume: 100,
+            context: null,
+            gainNode: null,
+            source: null,
+            debounce: false,
+            lastplay: null,
         };
-        this.audio = null;
-        this.gainNode = null;
-        this.audioContext = null;
     }
     //==========================================================================
     componentDidMount() {
-        if (this.props.PLAY.set) {
-            this.setState({ volume: this.props.PLAY.volume });
-            this.init_song();
-        }
+        const context = new (window.AudioContext || window.webkitAudioContext)();
+        const gainNode = context.createGain();
+        console.log('INIT VOL:', this.props.PLAY.volume);
+        gainNode.gain.value = this.props.PLAY.volume === 0 ? 0 : this.props.PLAY.volume / 100;
+        this.setState({ context, gainNode });
     }
     //==========================================================================
-    async componentDidUpdate(prevProps) {
-        const { set, playing, queue } = this.props.PLAY;
-        if (set && queue.songs) {
-            if (!prevProps.PLAY.queue.songs) this.init_song();
-            else if (queue.songs[playing] !== prevProps.PLAY.queue.songs[prevProps.PLAY.playing]) {
-                this.init_song();
-            }
-        }
+    componentDidUpdate(prevProps) {
+        if (this.props.PLAY.set && !isEmpty(this.props.PLAY.queue.songs)) {
+            if (!prevProps.PLAY.queue.songs)
+                this.start_song();
+            else if (
+                this.props.PLAY.queue.songs[this.props.PLAY.playing] !==
+                prevProps.PLAY.queue.songs[prevProps.PLAY.playing]
+            )
+                this.start_song();
+        } else
+            this.close_audio();
     }
     //==========================================================================
-    init_song = async () => {
-        const { playing, queue, is_playing } = this.props.PLAY;
-        const { path } = this.props.DIR;
-        if (isEmpty(this.audio) && isEmpty(this.audioContext) && isEmpty(this.gainNode)) {
-            AudioContext = window.AudioContext || window.webkitAudioContext;
-            this.audioContext = new AudioContext();
-            const rawBuffer = fs.readFileSync(path + '/' + queue.songs[playing]).buffer;
-            const audioBuffer = await this.audioContext.decodeAudioData(rawBuffer);
+    start_song = async () => {
+        if(this.state.debounce)     return;
+        if (this.state.lastplay === this.props.PLAY.queue.songs[this.props.PLAY.playing])   return;
+        
+        const { context, gainNode } = this.state;
+        if (
+            isEmpty(this.props.DIR.path) ||
+            isEmpty(this.props.PLAY.queue) ||
+            isEmpty(this.props.PLAY.playing)
+        )
+            return;
 
-            this.audio = this.audioContext.createBufferSource();
-            this.audio.buffer = audioBuffer;
-            this.gainNode = this.audioContext.createGain();
-            this.audio.connect(this.gainNode).connect(this.audioContext.destination);
+        this.setState({ debounce: true });
+        if(this.state.source)   
+            try {
+                this.state.source.stop();
+                this.state.source.disconnect();
+            } catch (error) {}
+        this.setState({lastplay: this.props.PLAY.queue.songs[this.props.PLAY.playing]});
+        const rawBuffer = fs.readFileSync(
+            this.props.DIR.path + '/' + this.props.PLAY.queue.songs[this.props.PLAY.playing],
+        ).buffer;
+        const audioBuffer = await context.decodeAudioData(rawBuffer);
 
-            if (is_playing) this.audio.start();
-        }
+        const source = context.createBufferSource();
+        source.buffer = audioBuffer;
+        source.connect(gainNode).connect(context.destination);
+
+        source.start();
+        this.setState({ source, debounce: false });
     };
     //==========================================================================
-    clear_audio = () => {
-        return new Promise(async (resolve, reject) => {
-            await this.audioContext.close();
-            this.audio = null;
-            this.gainNode = null;
-            this.audioContext = null;
-            resolve();
-        });
+    close_audio = async () => {
+        try {
+            this.state.source.stop();
+            this.setState({ source: null });
+        } catch(e) {}
     };
     //==========================================================================
-    gotoPrev = async () => {
-        await this.clear_audio();
+    gotoPrev = () => {
+        if(this.state.debounce) return;
+        this.close_audio();
         this.props.goto_prev();
+        this.start_song();
     };
-    gotoNext = async () => {
-        await this.clear_audio();
+    gotoNext = () => {
+        if (this.state.debounce) return;
+        this.close_audio();
         this.props.goto_next();
+        this.start_song();
     };
-    togglePlayingState = async () => {
-        if (this.props.PLAY.is_playing) await this.audioContext.suspend();
-        else await this.audioContext.resume();
+    togglePlayingState = () => {
+        if (this.state.debounce) return;
+        this.setState({ debounce: true });
+        if (this.props.PLAY.is_playing) this.state.context.suspend();
+        else this.state.context.resume();
         this.props.toggle_playing_state();
+        this.setState({ debounce: false });
     };
     //==========================================================================
-    handleVolumeChange = (event, volume) => this.setState({ volume });
-    handleVolumeCommit = (event, value) => {
-        if (this.gainNode) this.gainNode.gain.value = value === 0 ? 0 : value / 100;
-        this.setState({ volume: value });
-        this.props.set_volume(value);
+    // handleVolumeChange = (event, volume) => this.setState({ volume });
+    handleVolumeCommit = (event, volume) => this.props.set_volume(Math.round(volume));
+    handleVolumeChange = (event, volume) => {
+        const { gainNode } = this.state;
+        gainNode.gain.value = volume === 0 ? 0 : volume / 100;
+        this.setState({ gainNode });
     };
     //==========================================================================
     render() {
@@ -118,7 +142,7 @@ class Player extends Component {
                 <div className='player__volume'>
                     <i className='fa fa-volume-off' aria-hidden='true'></i>
                     <Slider
-                        value={this.state.volume}
+                        value={this.state.gainNode.gain.value*100}
                         color='secondary'
                         onChange={this.handleVolumeChange}
                         onChangeCommitted={this.handleVolumeCommit}

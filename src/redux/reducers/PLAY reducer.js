@@ -18,8 +18,8 @@ const initialState = {
     queue: [],
 };
 
-Number.prototype.mod = function (n) {
-    return ((this % n) + n) % n;
+const mod = function (m, n) {
+    return ((m % n) + n) % n;
 };
 
 export default function (state = initialState, action) {
@@ -40,7 +40,7 @@ export default function (state = initialState, action) {
                 is_playing: true,
             };
 
-        case PLAY_SET_PLAYING:
+        case PLAY_SET_VOLUME:
             return {
                 ...state,
                 volume: action.payload,
@@ -61,14 +61,14 @@ export default function (state = initialState, action) {
         case PLAY_GOTO_PREV:
             return {
                 ...state,
-                playing: (state.playing - 1).mod(state.queue.songs.length),
+                playing: mod(state.playing - 1, state.queue.songs.length),
                 is_playing: true,
             };
 
         case PLAY_GOTO_NEXT:
             return {
                 ...state,
-                playing: (state.playing + 1).mod(state.queue.songs.length),
+                playing: mod(state.playing + 1, state.queue.songs.length),
                 is_playing: true,
             };
 

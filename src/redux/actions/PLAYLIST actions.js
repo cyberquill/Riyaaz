@@ -7,10 +7,10 @@ import {
     PLAYLISTS_UPDATE,
     PLAYLISTS_CLEAR,
     PLAY_SET,
+    PLAY_CLEAR
 } from '../types';
 
 export const load_playlists = (DIR) => (dispatch) => {
-    console.log('PLAYLISTS ARMED!');
     const arr = fs.readFileSync(DIR + '/clusters.json', {
         encoding: 'utf-8',
     });
@@ -43,7 +43,6 @@ export const load_playlists = (DIR) => (dispatch) => {
 };
 
 export const sample_display = () => (dispatch, getState) => {
-    console.log('SAMPLING DETECTED!');
     const store = getState().PLAYLIST;
     const display = [];
     let playlists = store.playlist.slice();
@@ -61,24 +60,19 @@ export const sample_display = () => (dispatch, getState) => {
         display.push(store.playlist[id]);
         playlists = playlists.filter((pl) => pl.id !== id);
     }
-
+    dispatch({ type: PLAY_CLEAR });
     dispatch({ type: PLAYLISTS_SAMPLE, payload: display });
 };
 
 export const mark_visited = (selected) => (dispatch, getState) => {
     const { display } = getState().PLAYLIST;
+    dispatch({ type: PLAY_CLEAR });
     dispatch({ type: PLAYLISTS_VISITED, payload: selected });
     dispatch({ type: PLAY_SET, payload: { playing: 0, queue: display[selected] } });
 };
 
 export const update_params = () => (dispatch, getState) => {
-    const { playlist, display, gamma, visited, nUpdate } = getState().PLAYLIST;
-    console.log('-------');
-    console.log('PARAM UPDATE: ', nUpdate);
-    console.log('    VISITED:');
-    console.log(visited);
-    console.log('    OLD:');
-    console.log(playlist);
+    const { playlist, display, gamma, visited } = getState().PLAYLIST;
     visited.forEach((reward, pos) => {
         const clicked = display[pos].id;
         playlist.forEach((pl) => {
@@ -92,13 +86,10 @@ export const update_params = () => (dispatch, getState) => {
         });
         visited[pos] = 0;
     });
-    console.log('    NEW:');
-    console.log(playlist);
-    console.log('-------');
     dispatch({ type: PLAYLISTS_UPDATE, payload: { playlist, visited } });
 };
 
 export const clear_playlists = () => (dispatch) => {
-    console.log('PLAYLISTS DISARMED!');
+    dispatch({ type: PLAY_CLEAR });
     dispatch({ type: PLAYLISTS_CLEAR });
 };
