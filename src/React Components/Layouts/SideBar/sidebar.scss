@@ -4,13 +4,15 @@ $icon-dimension: 13rem;
 .sidebar {
     width: $sidebar-width;
     height: 100%;
-    background: #333;
+    background: linear-gradient(to bottom right, #00c6fb, #005bea);
+    box-shadow: 1rem 0rem 3rem -1rem rgba(#333, 0.5);
     color: white;
     display: flex;
     flex-direction: column;
     align-items: center;
     font-size: 1.5rem;
     padding-top: 5rem;
+    z-index: 10;
 
     &__icon {
         width: $icon-dimension;
@@ -50,7 +52,7 @@ $icon-dimension: 13rem;
             text-transform: uppercase;
             text-align: center;
             color: white;
-            background: #333;
+            background: transparent;
             cursor: pointer;
             transition: all 0.3s ease;
 

@@ -1,4 +1,24 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Riyaaz
+
+A content-based music recommendation system, that suggests playlists made from the locally stored songs, and updates its suggestions based on the user feedback using non-stationary Bayesian reinforcement learning. 
+
+Created using the *React* and the *Electron.js* frameworks. This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+___
+
+## Project Demo
+
+<a href="https://www.youtube.com/watch?v=sQdatvIpiKE" title="Riyaaz Demo" target="_blank">
+    <img src="./screenshots/preview.png" alt="Riyaaz Demo" />
+</a>
+
+___
+
+## Required Environment Variables
+
+VARIABLE | Sample value
+--- | ---
+BROWSER | none
+___
 
 ## Available Scripts
 
@@ -7,62 +27,71 @@ In the project directory, you can run:
 ### `npm start`
 
 Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+It opens a protable Electron window, in the development mode, i.e. the page will reload if you make edits. Also, you will also see any lint errors in the console.
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+## Extracted Feature-Set from Local Songs
 
-### `npm test`
+<div>
+    <div style="text-align: center">Song Waveform</div>
+    <img src="./screenshots/waveform.png" alt="Song feature" />
+</div>
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+___
+<div>
+    <div style="text-align: center">Tonnetz feature values</div>
+    <img src="./screenshots/tonnetz.png" alt="Song feature" />
+</div>
 
-### `npm run build`
+___
+<div>
+    <div style="text-align: center">Mel-frequency values</div>
+    <img src="./screenshots/melspectogram.png" alt="Song feature" />
+</div>
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+___
+<div>
+    <div style="text-align: center">Chromagram</div>
+    <img src="./screenshots/chroma_stft.png" alt="Song feature" />
+</div>
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+___
+<div>
+    <div style="text-align: center">MFCC values</div>
+    <img src="./screenshots/MFCC.png" alt="Song feature" />
+</div>
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+___
+<div>
+    <div style="text-align: center">RMS values</div>
+    <img src="./screenshots/rms.png" alt="Song feature" />
+</div>
 
-### `npm run eject`
+___
+<div>
+    <div style="text-align: center">Zero-Crossing Rate Values</div>
+    <img src="./screenshots/zero_crossing_rate.png" alt="Song feature" />
+</div>
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+___
+<div>
+    <div style="text-align: center">Spectral-Centroid values</div>
+    <img src="./screenshots/spectral_centroids.png" alt="Song feature" />
+</div>
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+___
+<div>
+    <div style="text-align: center">Spectral-Rolloff values</div>
+    <img src="./screenshots/spectral_rolloff.png" alt="Song feature" />
+</div>
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+___
+<div>
+    <div style="text-align: center">Spectral-Bandwidth values</div>
+    <img src="./screenshots/spectral_bandwidth.png" alt="Song feature" />
+</div>
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+___
+<div>
+    <div style="text-align: center">Spectral-contrast values</div>
+    <img src="./screenshots/spectral_contrast.png" alt="Song feature" />
+</div>
