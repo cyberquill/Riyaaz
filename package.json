@@ -10,7 +10,7 @@
         "@testing-library/react": "^9.5.0",
         "@testing-library/user-event": "^7.2.1",
         "apexcharts": "^3.19.2",
-        "electron": "^9.0.0",
+        "electron": "^22.3.25",
         "jstat": "^1.9.3",
         "list-react-files": "^0.2.0",
         "node-sass": "^4.14.1",
